@@ -15,4 +15,6 @@ J:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.exe.licenses
 J:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.exe
 J:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.pdb
 J:\Projects\ECommerce\ECommerce\obj\Debug\GeneratedInternalTypeHelper.g.cs
+J:\Projects\ECommerce\ECommerce\obj\Debug\ChildWindow.g.cs
+J:\Projects\ECommerce\ECommerce\obj\Debug\ChildWindow.baml
 J:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.csprojResolveAssemblyReference.cache

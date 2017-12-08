@@ -62,13 +62,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChildWindow.xaml.cs">
+      <DependentUpon>ChildWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\MultiTextChecker.cs" />
     <Compile Include="Converters\ValueSubtractor.cs" />
     <Compile Include="Model\DelegateCommand.cs" />
     <Compile Include="Model\DelegateCommandT.cs" />
     <Compile Include="Model\GridCommand.cs" />
+    <Compile Include="Model\IDialogService.cs" />
     <Compile Include="Model\ViewModelBase.cs" />
+    <Compile Include="ViewModel\ChildWindowViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
+    <Page Include="ChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
