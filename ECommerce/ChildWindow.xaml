@@ -13,7 +13,6 @@
                 <BeginStoryboard>
                     <Storyboard BeginTime="0" Duration="Forever">
                         <DoubleAnimation  Storyboard.TargetProperty="(Window.Left)" From="0" To="300" AutoReverse="true" BeginTime="0:0:0" Duration="0:0:1" RepeatBehavior="2x"/>
-
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger.Actions>

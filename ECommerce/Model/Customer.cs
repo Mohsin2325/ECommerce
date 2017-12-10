@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ECommerce.Model
 {
+    [DataContract (Name ="Customer"),Serializable]
     public class Customer:INotifyPropertyChanged
     {
         private string _name;
@@ -33,6 +35,7 @@ namespace ECommerce.Model
                 OnPropertyChanged("IsChecked");
             }
         }
+        [DataMember(Name ="firstname")]
         public string Name
         {
             get
@@ -46,6 +49,19 @@ namespace ECommerce.Model
             }
         }
 
+        [DataMember(Name = "lastname")]
+        public string LastName
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("LastName");
+            }
+        }
         public int ID
         {
             get
