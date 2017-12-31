@@ -14,6 +14,7 @@
     <Window.Resources>
         <converters:ValueSubtractor x:Key="ValueSub"/>
         <converters:MultiTextChecker x:Key="MultiCheck"/>
+        <converters:BoolToVisibiltyConverter x:Key="booltovisibility"/>
         <ControlTemplate x:Key="ButtonTemplate">
             <StackPanel>
                 <Ellipse Fill="LightSkyBlue" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"></Ellipse>
@@ -49,7 +50,7 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
-
+        
     </Window.Resources>
     <Grid RenderTransformOrigin="0.377,0.521" Margin="0,32,2,17">
         <Grid.RowDefinitions>
@@ -93,30 +94,30 @@
                     </WrapPanel>
                 </DataTemplate>
             </DataGrid.ItemTemplate>
-            
+
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Add">
                         <MenuItem.Template>
                             <ControlTemplate>
                                 <WrapPanel>
-                                 <TextBox Name="DataGridTextID" Width="50"></TextBox>
-                                <TextBox Name="DataGridTextName" Width="50"></TextBox>
+                                    <TextBox Name="DataGridTextID" Width="50"></TextBox>
+                                    <TextBox Name="DataGridTextName" Width="50"></TextBox>
                                     <Button Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=DataGridTextName,Path=Text}">
                                         <Button.IsEnabled>
                                             <MultiBinding Converter="{StaticResource MultiCheck}">
                                                 <Binding ElementName="DataGridTextID" Path="Text"></Binding>
                                                 <Binding ElementName="DataGridTextName" Path="Text"></Binding>
                                             </MultiBinding>
-                                        </Button.IsEnabled>                                        
+                                        </Button.IsEnabled>
                                     </Button>
                                 </WrapPanel>
-                            </ControlTemplate>
+                            </ControlTemplate>                            
                         </MenuItem.Template>
                     </MenuItem>
                 </ContextMenu>
             </DataGrid.ContextMenu>
-           
+
         </DataGrid>
 
         <TabControl x:Name="tabControl" Grid.Column="1" HorizontalAlignment="Left" Height="90" Margin="77,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="345">
@@ -133,19 +134,19 @@
                                 <DatePicker ></DatePicker>
                             </WrapPanel>
                         </DataTemplate>
-                        
+
                     </DataGrid.ItemTemplate>
                     <DataGrid.Columns >
-                        <DataGridTemplateColumn models:GridCommand.DataGridRightClickCommand="{Binding GridRightClick}"> 
+                        <DataGridTemplateColumn models:GridCommand.DataGridRightClickCommand="{Binding GridRightClick}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
 
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
+
                     </DataGrid.Columns>
-                    
+
                 </DataGrid>
 
             </TabItem>
@@ -153,5 +154,8 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
+        <ProgressBar HorizontalAlignment="Left" Height="21" Margin="10,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80"  Visibility="{Binding Path=IsBusy,Source=DataContext.progressModel,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,Converter={StaticResource booltovisibility}}">
+            
+        </ProgressBar>
     </Grid>
 </Window>

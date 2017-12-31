@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.ComponentModel.DataAnnotations;
 namespace ECommerce.Model
 {
     [DataContract (Name ="Customer"),Serializable]
@@ -35,6 +35,8 @@ namespace ECommerce.Model
                 OnPropertyChanged("IsChecked");
             }
         }
+        
+        [Display(Name="First Name")]
         [DataMember(Name ="firstname")]
         public string Name
         {

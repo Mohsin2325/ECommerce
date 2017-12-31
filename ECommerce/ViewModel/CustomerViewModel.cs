@@ -10,6 +10,7 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace ECommerce.ViewModel
@@ -23,10 +24,13 @@ namespace ECommerce.ViewModel
         public DelegateCommand GridDoubleClick { get; set; }
         public DelegateCommand GridRightClick { get; set; }
         public DelegateCommandT<object> SaveCommand { get; set; }
+        public Visibility IsBusy { get; set; }
+        public ProgressModel progressModel { get; set; } 
         public CustomerViewModel()
         {
 
-            customer = new Customer() { ID=1,Name="Mohsin"};
+            progressModel= new ProgressModel() { IsBusy = false };
+            customer = new Customer() { ID=1,Name="Mohsin",IsChecked=false};
 
             Customers = new ObservableCollection<Customer>();
             Customers.CollectionChanged += Customers_CollectionChanged;
@@ -35,6 +39,25 @@ namespace ECommerce.ViewModel
             GridDoubleClick = new DelegateCommand(DoubleClick);
             GridRightClick = new DelegateCommand(RightClick);
             SaveCommand = new DelegateCommandT<object>(ExecSaveCommand);
+
+            int[] arr = new int[8] {1,5,0,9,7,4,10,4};
+          
+            int max=0, nmax=0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+               // nmax = arr[i];
+                if (arr[i]>max)
+                {
+                    nmax = max;
+                    max = arr[i];
+                }
+                if (i==0)
+                {
+                    nmax = arr[i];
+                }
+                
+            }
+            int p=0;
         }
 
         private void ExecSaveCommand(object param)
@@ -66,6 +89,7 @@ namespace ECommerce.ViewModel
 
             try
             {
+                progressModel.IsBusy = true;
                 HttpWebRequest req = HttpWebRequest.CreateHttp("http://localhost:91/CustomerService.svc/GetCustomer/1");
                 req.Method = "GET";
                 req.ContentType = "application/json";
@@ -73,9 +97,13 @@ namespace ECommerce.ViewModel
 
                 HttpWebRequest req2 = HttpWebRequest.CreateHttp("http://localhost:91/CustomerService.svc/GetCustomerlist/1");
                 req2.Method = "GET";
+                byte[] bytes = Encoding.UTF8.GetBytes("test:test");
+                string base64 = Convert.ToBase64String(bytes);
+                req2.Headers[HttpRequestHeader.Authorization] = base64;
                 req2.ContentType = "application/json";
+                req2.Credentials = new NetworkCredential("test", "test");
                 req2.BeginGetResponse(new AsyncCallback(WebResponseList), req2);
-
+                
 
                 #region GET
                 //HttpWebRequest re = HttpWebRequest.CreateHttp("http://localhost:91/CustomerService.svc/GetCustomer/1");
@@ -106,6 +134,8 @@ namespace ECommerce.ViewModel
                 //throw;
             }
         }
+
+
 
         public async Task<Customer> GetResponse(HttpWebRequest req)
         {
@@ -157,8 +187,8 @@ namespace ECommerce.ViewModel
                 DataContractJsonSerializer dc = new DataContractJsonSerializer(typeof(List<Customer>));
                 List<Customer> ob = (List<Customer>)dc.ReadObject(streamResponse);
                 streamResponse.Flush();
-                
 
+                progressModel.IsBusy = false;
             }
             catch (Exception ex)
             {
