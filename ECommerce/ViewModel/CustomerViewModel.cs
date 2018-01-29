@@ -1,4 +1,5 @@
-﻿using ECommerce.Model;
+﻿using ECommerce.Converters;
+using ECommerce.Model;
 using ECommerce.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ using System.Windows.Threading;
 
 namespace ECommerce.ViewModel
 {
-   public  class CustomerViewModel : ViewModelBase
+   public  class CustomerViewModel : ViewModelBase,INotifyPropertyChanged
     {
        public  Customer customer { get; set; }
         public ObservableCollection<Customer> Customers { get; set; }
@@ -26,12 +28,34 @@ namespace ECommerce.ViewModel
         public DelegateCommandT<object> SaveCommand { get; set; }
         public Visibility IsBusy { get; set; }
         public ProgressModel progressModel { get; set; } 
+        public AttributeDictionary ad { get; set; }
+        public string _empDisplayName { get; set; }
+        public string EmployeeDisplayName
+        {
+            get
+            {
+                return _empDisplayName;
+            }
+            set
+            {
+                _empDisplayName = value;
+                OnPropertyChanged("EmployeeDisplayName");
+            }
+        }// = DisplayAttributeConverter.GetMemberName((Customer c) => c.Name);
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
         public CustomerViewModel()
         {
 
             progressModel= new ProgressModel() { IsBusy = false };
             customer = new Customer() { ID=1,Name="Mohsin",IsChecked=false};
-
+            
             Customers = new ObservableCollection<Customer>();
             Customers.CollectionChanged += Customers_CollectionChanged;
 
@@ -39,7 +63,7 @@ namespace ECommerce.ViewModel
             GridDoubleClick = new DelegateCommand(DoubleClick);
             GridRightClick = new DelegateCommand(RightClick);
             SaveCommand = new DelegateCommandT<object>(ExecSaveCommand);
-
+            EmployeeDisplayName= DisplayAttributeConverter.GetMemberName((Customer c) => c.Name);
             int[] arr = new int[8] {1,5,0,9,7,4,10,4};
           
             int max=0, nmax=0;
@@ -58,6 +82,17 @@ namespace ECommerce.ViewModel
                 
             }
             int p=0;
+
+            Type t = Type.GetType("ECommerce.ViewModel.CustomerViewModel");
+
+            ad = new AttributeDictionary();
+            ad.GetAttributes(typeof(Customer));
+            foreach (var item in ad.DisplayAttribute)
+            {
+
+            }
+            
+            //t.InvokeMember("GridDoubleClick",BindingFlags.Default,null,null,null);
         }
 
         private void ExecSaveCommand(object param)
@@ -84,8 +119,8 @@ namespace ECommerce.ViewModel
         {
             //Customers.Add(new Customer() { ID = 3, Name = "MH", IsChecked = true });
 
-            //IDialogService<ObservableCollection<Customer>> dv = new DialogService<ObservableCollection<Customer>>();
-            //dv.ShowDialog(Customers, new ChildWindow());
+            IDialogService<ObservableCollection<Customer>> dv = new DialogService<ObservableCollection<Customer>>();
+            dv.ShowDialog(Customers, new ChildWindow());
 
             try
             {

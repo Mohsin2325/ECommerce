@@ -24,6 +24,8 @@ namespace ECommerce
         {
             InitializeComponent();
             this.DataContext = new CustomerViewModel();
+           var v= expander.GetBindingExpression(Expander.HeightProperty);
+            
         }
 
         private void DataGrid_MouseRightButtonUp_1(object sender, System.Windows.Input.MouseButtonEventArgs e)

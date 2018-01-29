@@ -6,6 +6,8 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+
 namespace ECommerce.Model
 {
     [DataContract (Name ="Customer"),Serializable]
@@ -15,6 +17,11 @@ namespace ECommerce.Model
         private int _id;
         private bool _isChecked;
 
+        public Customer()
+        {
+            //_displatAttribute = new Dictionary<string, string>();
+            //GetAttributes(typeof(Customer));
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
@@ -22,7 +29,33 @@ namespace ECommerce.Model
                 PropertyChanged(this,
                     new System.ComponentModel.PropertyChangedEventArgs(propertyName));
         }
-        
+
+        //private Dictionary<string, string> _displatAttribute;
+        //public Dictionary<string, string> DisplayAttribute
+        //{
+        //    get
+        //    {
+        //        return _displatAttribute;
+        //    }
+        //}
+
+
+
+        //public void GetAttributes(Type type)
+        //{
+        //    foreach (var item in type.GetProperties())
+        //    {
+        //        DisplayAttribute v2 = item.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
+        //        if (!_displatAttribute.ContainsKey(item.Name))
+        //        {
+
+        //            //var v1= item.GetCustomAttribute<DisplayNameAttribute>(false);
+        //            _displatAttribute.Add(item.Name, v2 != null ? v2.Name : "");
+        //        }
+        //    }
+        //    OnPropertyChanged("DisplayAttribute");
+        //}
+
         public bool IsChecked
         {
             get
@@ -36,7 +69,7 @@ namespace ECommerce.Model
             }
         }
         
-        [Display(Name="First Name")]
+        [Display(Name="First Name",Description ="Name details")]
         [DataMember(Name ="firstname")]
         public string Name
         {
