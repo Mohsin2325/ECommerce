@@ -37,5 +37,10 @@ namespace ECommerce
 
             // At this point targetCell should be the cell that was clicked or null if something went wrong.
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
     }
 }

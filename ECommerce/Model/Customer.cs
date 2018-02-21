@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using System.Collections.ObjectModel;
 
 namespace ECommerce.Model
 {
     [DataContract (Name ="Customer"),Serializable]
-    public class Customer:INotifyPropertyChanged
+    public class Customer:INotifyPropertyChanged,ICustomerView
     {
         private string _name;
         private int _id;
@@ -28,6 +29,15 @@ namespace ECommerce.Model
             if (PropertyChanged != null)
                 PropertyChanged(this,
                     new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+
+        public bool CanAccess(ICustomerView cc)
+        {
+            if (cc!=null)
+            {
+                return true;
+            }
+            return false;
         }
 
         //private Dictionary<string, string> _displatAttribute;
@@ -110,5 +120,11 @@ namespace ECommerce.Model
             }
         }
 
+        public ObservableCollection<Customer> Customers
+        {
+            get;
+
+            set;
+        }
     }
 }

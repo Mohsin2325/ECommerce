@@ -17,7 +17,7 @@ using System.Windows.Threading;
 
 namespace ECommerce.ViewModel
 {
-   public  class CustomerViewModel : ViewModelBase,INotifyPropertyChanged
+   public  class CustomerViewModel : ViewModelBase,INotifyPropertyChanged,IDisposable
     {
        public  Customer customer { get; set; }
         public ObservableCollection<Customer> Customers { get; set; }
@@ -26,10 +26,21 @@ namespace ECommerce.ViewModel
         public DelegateCommand GridDoubleClick { get; set; }
         public DelegateCommand GridRightClick { get; set; }
         public DelegateCommandT<object> SaveCommand { get; set; }
+        public DelegateCommand OnWindowClosing { get; set; }
         public Visibility IsBusy { get; set; }
         public ProgressModel progressModel { get; set; } 
         public AttributeDictionary ad { get; set; }
         public string _empDisplayName { get; set; }
+        //public bool CanAccess(Customer cc)
+        //{
+        //    if (cc != null)
+        //    {
+
+
+        //        return true;
+        //    }
+        //    return false;
+        //}
         public string EmployeeDisplayName
         {
             get
@@ -62,7 +73,7 @@ namespace ECommerce.ViewModel
             ButtonCommand = new DelegateCommand(Display);
             GridDoubleClick = new DelegateCommand(DoubleClick);
             GridRightClick = new DelegateCommand(RightClick);
-            SaveCommand = new DelegateCommandT<object>(ExecSaveCommand);
+            SaveCommand = new DelegateCommandT<object>(ExecSaveCommand, CanExecuteSaveCommand);
             EmployeeDisplayName= DisplayAttributeConverter.GetMemberName((Customer c) => c.Name);
             int[] arr = new int[8] {1,5,0,9,7,4,10,4};
           
@@ -91,11 +102,24 @@ namespace ECommerce.ViewModel
             {
 
             }
-            
+            OnWindowClosing = new DelegateCommand(() =>
+            {
+                Dispose();
+            }
+                );
+
             //t.InvokeMember("GridDoubleClick",BindingFlags.Default,null,null,null);
         }
+        private bool CanExecuteSaveCommand(object ob)
+        {
+            //if (Customers != null)
+            //{
+            //    return false;
+            //}
+            return true;
+        }
 
-        private void ExecSaveCommand(object param)
+        public void ExecSaveCommand(object param)
         {
             CustomerClient cc = new CustomerClient("ep2");
             cc.ClientCredentials.UserName.UserName = "a";
@@ -110,11 +134,42 @@ namespace ECommerce.ViewModel
         }
 
         
-        void RightClick()
+        public void RightClick()
         {
-            Customers.Add(new Customer() { ID = 3, Name = "MH", IsChecked = true });
-        }
+            if (customer.CanAccess(customer))
+            {
+                Customers.Add(new Customer() { ID = 3, Name = "MH", IsChecked = true });
+            }
+            try
+            {
+                Task<int> tk = new Task<int>(() =>
+                {
+                    for (int i = 0; i < 1000000; i++)
+                    {
 
+                    }
+                    return 0;
+                }
+                    );
+                tk.Start();
+                var v = tk.GetAwaiter();
+                v.OnCompleted(DoNothing);
+            }
+            catch (Exception ex)
+            {
+
+                
+            }
+        }
+        void DoNothing()
+        { }
+        public void RightClickForunitTest(ICustomerView c)
+        {
+            if (customer.CanAccess(c))
+            {
+                Customers.Add(new Customer() { ID = 3, Name = "MH", IsChecked = true });
+            }
+        }
         void DoubleClick()
         {
             //Customers.Add(new Customer() { ID = 3, Name = "MH", IsChecked = true });
@@ -243,6 +298,12 @@ namespace ECommerce.ViewModel
         {
             return true; 
         }
+
+        public void Dispose()
+        {
+            // SaveCommand.Dispose();
+            SaveCommand = null;
+        }
     }
     public static class ExtnClass
     {
@@ -250,5 +311,5 @@ namespace ECommerce.ViewModel
         {
             return st.Substring(0, 1);
         }
-    }
+    }    
 }

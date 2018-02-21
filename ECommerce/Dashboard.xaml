@@ -11,7 +11,11 @@
         mc:Ignorable="d"
         xmlns:converters="clr-namespace:ECommerce.Converters"
         xmlns:models="clr-namespace:ECommerce.Model"
-        Title="Dashboard" Height="498.438" Width="604.688">
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Title="Dashboard" Height="498.438" Width="604.688" 
+        xmlns:custControl="clr-namespace:ECommerce.Controls"
+    >
+    
     <Window.Resources>
         <converters:ValueSubtractor x:Key="ValueSub"/>
         <converters:MultiTextChecker x:Key="MultiCheck"/>
@@ -99,7 +103,7 @@
                                 <Binding ElementName="customer.Name"/>
                             </MultiBinding>
                         </TextBlock.Text>-->
-                    </TextBlock>
+                    </TextBlock>                    
                 </StackPanel>
             </Expander>
 
@@ -157,6 +161,7 @@
                                 <CheckBox Content="{Binding ID, Mode=TwoWay}"/>
                                 <TextBox Text="{Binding Name[Name], Mode=TwoWay}"/>
                                 <DatePicker ></DatePicker>
+                                
                             </WrapPanel>
                         </DataTemplate>
 
@@ -184,8 +189,12 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-        <ProgressBar HorizontalAlignment="Left" Height="21" Margin="10,42,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80"  Visibility="{Binding Path=IsBusy,Source=DataContext.progressModel,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,Converter={StaticResource booltovisibility}}">
-            
-        </ProgressBar>
+        <TextBox Grid.Row="1" Width="50" Height="50">
+            <TextBox.Template>
+                <ControlTemplate>                    
+                <custControl:AutoCompleteCombox ItemsSource="{Binding Customer, Mode=TwoWay}"></custControl:AutoCompleteCombox>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
     </Grid>
 </Window>
