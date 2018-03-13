@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:ECommerce"
              StartupUri="Dashboard.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ECommerce;component/Controls/AutoCompleteCombo.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

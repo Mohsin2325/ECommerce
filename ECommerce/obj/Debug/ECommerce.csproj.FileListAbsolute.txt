@@ -17,7 +17,6 @@ J:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.csproj.GenerateResource.Cach
 J:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.exe.licenses
 J:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.exe
 J:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.pdb
-J:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.csprojResolveAssemblyReference.cache
 J:\Projects\ECommerce\ECommerce\bin\Debug\System.Windows.Interactivity.dll
 J:\Projects\ECommerce\ECommerce\bin\Debug\de\System.Windows.Interactivity.resources.dll
 J:\Projects\ECommerce\ECommerce\bin\Debug\en\System.Windows.Interactivity.resources.dll
@@ -30,3 +29,9 @@ J:\Projects\ECommerce\ECommerce\bin\Debug\ru\System.Windows.Interactivity.resour
 J:\Projects\ECommerce\ECommerce\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
 J:\Projects\ECommerce\ECommerce\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
 J:\Projects\ECommerce\ECommerce\obj\Debug\Controls\AutoCompleteCombo.baml
+J:\Projects\ECommerce\ECommerce\obj\Debug\Themes\Generic.baml
+J:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.csprojResolveAssemblyReference.cache
+J:\Projects\ECommerce\ECommerce\obj\Debug\App.baml
+F:\Projects\ECommerce\ECommerce\bin\Debug\ECommerce.exe.config
+F:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.exe
+F:\Projects\ECommerce\ECommerce\obj\Debug\ECommerce.pdb

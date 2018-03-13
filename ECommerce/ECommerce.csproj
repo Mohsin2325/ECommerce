@@ -72,6 +72,8 @@
       <DependentUpon>ChildWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AutoCompleteCombox.cs" />
+    <Compile Include="Controls\AutoCompleteList.cs" />
+    <Compile Include="Controls\MyCustomControl.cs" />
     <Compile Include="Converters\BoolToVisibiltyConverter.cs" />
     <Compile Include="Converters\DisplayAttributeConverter.cs" />
     <Compile Include="Converters\MultiTextChecker.cs" />
@@ -118,6 +120,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Customer.cs" />

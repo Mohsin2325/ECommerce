@@ -161,7 +161,7 @@
                                 <CheckBox Content="{Binding ID, Mode=TwoWay}"/>
                                 <TextBox Text="{Binding Name[Name], Mode=TwoWay}"/>
                                 <DatePicker ></DatePicker>
-                                
+                                <Image></Image>  
                             </WrapPanel>
                         </DataTemplate>
 
@@ -189,12 +189,13 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-        <TextBox Grid.Row="1" Width="50" Height="50">
+        <!--<TextBox Grid.Row="1" Width="50" Height="50">
             <TextBox.Template>
                 <ControlTemplate>                    
                 <custControl:AutoCompleteCombox ItemsSource="{Binding Customer, Mode=TwoWay}"></custControl:AutoCompleteCombox>
                 </ControlTemplate>
             </TextBox.Template>
-        </TextBox>
+        </TextBox>-->
+        <custControl:AutoCompleteCombox Grid.Row="1" Width="50" Height="50" ItemsSource="{Binding Customers, Mode=TwoWay}"/>
     </Grid>
 </Window>

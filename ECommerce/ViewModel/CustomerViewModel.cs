@@ -305,9 +305,10 @@ namespace ECommerce.ViewModel
             SaveCommand = null;
         }
     }
+
     public static class ExtnClass
     {
-        static string StringEx(this string st)
+       public static string StringEx(this string st)
         {
             return st.Substring(0, 1);
         }
