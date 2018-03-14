@@ -15,8 +15,8 @@ using System.Windows.Controls;
 
 namespace ECommerce.Controls
 {
-    [TemplatePart(Name = "PART_ListBox", Type =typeof(ListBox))]
-    [TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
+    //[TemplatePart(Name = "PART_ListBox", Type =typeof(ListBox))]
+    //[TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
     public class AutoCompleteCombox: Control
     {
 

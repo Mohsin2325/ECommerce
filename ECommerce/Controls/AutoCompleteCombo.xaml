@@ -23,7 +23,7 @@
                         <TextBox x:Name="PART_TextBox" Height="10" Width="50" >
                             
                         </TextBox>
-                        <ListBox x:Name="PART_ListBox" ItemsSource="{Binding SourceCollection,RelativeSource={RelativeSource TemplatedParent}}"  Height="{TemplateBinding Height,Converter={StaticResource Valueadder}}" Width="{TemplateBinding Width,Converter={StaticResource Valueadder}}" ItemTemplate="{StaticResource ListBoxTemplate}" >                                                        
+                        <ListBox x:Name="PART_ListBox" ItemsSource="{Binding ItemsSource,RelativeSource={RelativeSource TemplatedParent}}"  Height="{TemplateBinding Height,Converter={StaticResource Valueadder}}" Width="{TemplateBinding Width,Converter={StaticResource Valueadder}}" ItemTemplate="{StaticResource ListBoxTemplate}" >                                                        
                         </ListBox>
                     </StackPanel>
                 

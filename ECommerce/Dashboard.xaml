@@ -123,7 +123,7 @@
                     </WrapPanel>
                 </DataTemplate>
             </DataGrid.ItemTemplate>-->
-
+            
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Add">
@@ -139,9 +139,10 @@
                                                 <Binding ElementName="DataGridTextName" Path="Text"></Binding>
                                             </MultiBinding>
                                         </Button.IsEnabled>
+                                        
                                     </Button>
                                 </WrapPanel>
-                            </ControlTemplate>                            
+                            </ControlTemplate> 
                         </MenuItem.Template>
                     </MenuItem>
                 </ContextMenu>
@@ -159,10 +160,17 @@
                         <DataTemplate>
                             <WrapPanel>
                                 <CheckBox Content="{Binding ID, Mode=TwoWay}"/>
-                                <TextBox Text="{Binding Name[Name], Mode=TwoWay}"/>
+                                <TextBox Name="TabTexbox" Text="{Binding Name[Name], Mode=TwoWay}"/>
                                 <DatePicker ></DatePicker>
                                 <Image></Image>  
                             </WrapPanel>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=TabTexbox,Path=Text,Mode=TwoWay}" Value="Mohsin">
+                                    <Setter TargetName="TabTexbox" Property="Foreground" Value="Red">
+
+                                    </Setter>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
 
                     </DataGrid.ItemTemplate>
@@ -184,7 +192,7 @@
                 <!--<Grid Background="#FFE5E5E5"/>-->
                 <StackPanel>
                     <ListBox SelectionMode="Multiple" ItemsSource="{Binding Customers, Mode=TwoWay}"  ItemTemplateSelector="{StaticResource DataTemplateSelect}">
-                     
+                           
                     </ListBox>
                 </StackPanel>
             </TabItem>
