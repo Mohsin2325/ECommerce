@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ECommerce.Model;
+using ECommerce.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +19,23 @@ namespace ECommerce
     /// <summary>
     /// Interaction logic for ChildWindow.xaml
     /// </summary>
-    public partial class ChildWindow : Window
+    public partial class ChildWindow
     {
         public ChildWindow()
         {
             InitializeComponent();
+            var v = this.DataContext;
         }
+
+        //private void textBox_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (this.DataContext!=null)
+        //    {
+        //        CustomerViewModel vm = this.DataContext as CustomerViewModel;
+        //        vm.Customers.Clear();
+        //        vm.Customers.Add( new Customer() { Name = "Rehman", ID = 1 });
+                
+        //    }
+        //}
     }
 }

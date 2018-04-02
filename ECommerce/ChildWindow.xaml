@@ -1,10 +1,10 @@
-﻿<Window x:Class="ECommerce.ChildWindow"
+﻿<localControls:ChildWindowCustom x:Class="ECommerce.ChildWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ECommerce"
-        
+        xmlns:localControls="clr-namespace:ECommerce.View"
         mc:Ignorable="d"
         Title="ChildWindow" Height="300" Width="300">
 
@@ -20,8 +20,8 @@
         </EventTrigger>
     </Window.Triggers>
     <Grid>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="29,31,0,0" VerticalAlignment="Top" Height="210" Width="186" ItemsSource="{Binding Customers, Mode=TwoWay}" 
-                  >
+
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="29,31,0,0" VerticalAlignment="Top" Height="210" Width="186" ItemsSource="{Binding customers, Mode=TwoWay}">
             <DataGrid.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -31,8 +31,7 @@
                 </DataTemplate>
             </DataGrid.ItemTemplate>
         </DataGrid>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="220,158,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="72"
-                
-                 />
+        <Button x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="220,158,0,0" Command="{Binding ButtonClickCommand}"  VerticalAlignment="Top" Width="72"/>
+        
     </Grid>
-</Window>
+</localControls:ChildWindowCustom>

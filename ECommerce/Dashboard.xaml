@@ -92,7 +92,7 @@
             <Expander Name="expander" Grid.Row="0" Height="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Height}" Width="{Binding RelativeSource={RelativeSource Self},Path=Height}" Margin="0,0,0,39.5" DockPanel.Dock="Top">
 
                 <StackPanel>
-                    <TextBox  Background="LightBlue" Height="{Binding height, RelativeSource={RelativeSource AncestorType={x:Type Expander}}}" RenderTransformOrigin="0.602,2.948" behv:TextboxBehavior.CorrectTextboxProperty="MOhsin"/>
+                    <TextBox  Background="LightBlue" Height="{Binding height, RelativeSource={RelativeSource AncestorType={x:Type Expander}}}" RenderTransformOrigin="0.602,2.948" />
                     <TextBlock Height="{Binding ElementName=expander,Path=Height}" Text="{Binding EmployeeDisplayName,Mode=TwoWay}" >
                         <!--<TextBlock.Text>
                             <MultiBinding >
@@ -131,7 +131,11 @@
                             <ControlTemplate>
                                 <WrapPanel>
                                     <TextBox Name="DataGridTextID" Width="50"></TextBox>
-                                    <TextBox Name="DataGridTextName" Width="50"></TextBox>
+                                    <TextBox Name="DataGridTextName" Width="50">
+                                        <i:Interaction.Behaviors>
+                                            <behv:TextboxBehavior></behv:TextboxBehavior>
+                                        </i:Interaction.Behaviors>
+                                    </TextBox>
                                     <Button Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=DataGridTextName,Path=Text}">
                                         <Button.IsEnabled>
                                             <MultiBinding Converter="{StaticResource MultiCheck}">
@@ -160,17 +164,18 @@
                         <DataTemplate>
                             <WrapPanel>
                                 <CheckBox Content="{Binding ID, Mode=TwoWay}"/>
-                                <TextBox Name="TabTexbox" Text="{Binding Name[Name], Mode=TwoWay}"/>
+                                <TextBox Name="TabTexbox" Text="{Binding Name, Mode=TwoWay}">
+                                    
+                                </TextBox>
                                 <DatePicker ></DatePicker>
-                                <Image></Image>  
+                                <Image></Image>
                             </WrapPanel>
-                            <DataTemplate.Triggers>
+                            <!--<DataTemplate.Triggers>
                                 <DataTrigger Binding="{Binding ElementName=TabTexbox,Path=Text,Mode=TwoWay}" Value="Mohsin">
                                     <Setter TargetName="TabTexbox" Property="Foreground" Value="Red">
-
                                     </Setter>
                                 </DataTrigger>
-                            </DataTemplate.Triggers>
+                            </DataTemplate.Triggers>-->
                         </DataTemplate>
 
                     </DataGrid.ItemTemplate>

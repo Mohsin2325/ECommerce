@@ -1,15 +1,17 @@
 ﻿using ECommerce.Model;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interactivity;
 
 namespace ECommerce.Behavior
 {
-   public class TextboxBehavior: FrameworkElement
+   public class TextboxBehavior: Behavior<UIElement>
     {
         public static readonly DependencyProperty CorrectTextboxProperty =
     DependencyProperty.RegisterAttached("CorrectTextbox", typeof(string), typeof(TextboxBehavior),
@@ -49,6 +51,26 @@ namespace ECommerce.Behavior
         }
 
         private static void Tx_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+        protected override void OnAttached()
+        {
+            TextBox bx = this.AssociatedObject as TextBox;
+            bx.TextChanged += Bx_TextChanged;
+          
+        }
+
+        private void Bx_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int i;
+            if (String.IsNullOrEmpty( (sender as TextBox).Text))
+            {
+                (sender as TextBox).Background = System.Windows.Media.Brushes.Red;
+            }
+        }
+
+        protected override void OnDetaching()
         {
             
         }

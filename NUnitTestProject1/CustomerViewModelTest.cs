@@ -34,5 +34,6 @@ namespace NUnitTestProject1
             cust.RightClickForunitTest(v.Object);
             Assert.AreEqual(cust.Customers[0].ID,cc[0].ID);
         }
+        
     }
 }

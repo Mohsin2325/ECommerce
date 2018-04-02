@@ -170,12 +170,17 @@ namespace ECommerce.ViewModel
                 Customers.Add(new Customer() { ID = 3, Name = "MH", IsChecked = true });
             }
         }
+
+        private void HandleChildClose(bool result, object viewmodel)
+        {
+
+        }
         void DoubleClick()
         {
             //Customers.Add(new Customer() { ID = 3, Name = "MH", IsChecked = true });
 
-            IDialogService<ObservableCollection<Customer>> dv = new DialogService<ObservableCollection<Customer>>();
-            dv.ShowDialog(Customers, new ChildWindow());
+            IDialogService dv = new DialogService();
+            dv.ShowDialog(typeof(ChildWindowViewModel), new ChildWindow(),Customers, HandleChildClose);
 
             try
             {

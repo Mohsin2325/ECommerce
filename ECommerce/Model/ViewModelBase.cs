@@ -21,6 +21,13 @@ namespace ECommerce.Model
         //{
 
         //}
-        
+
+        private Action<bool, object> _onActionClosed;
+        public Action<bool, object> OnCloseAction
+        {
+            get { return _onActionClosed; }
+            set { _onActionClosed = value; }
+        }
+
     }
 }
